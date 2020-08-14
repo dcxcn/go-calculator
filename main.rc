@@ -19,13 +19,13 @@ BEGIN
     BEGIN
         BLOCK "040904B0"
         BEGIN
-			VALUE "CompanyName", "blog.csdn.net/FlushHip"
-			VALUE "FileDescription", "FlushHip"
+			VALUE "CompanyName", "dcxcn/go-calculator"
+			VALUE "FileDescription", "go-calculator"
 			VALUE "FileVersion", TOSTRING(MAKEVER(VER_MAJOR, VER_MINOR, VER_PATCH, VER_REVISION, VER_REVISION_HASH))
-			VALUE "InternalName", "FlushHip"
-			VALUE "LegalCopyright", "Copyright (C) 2018. FlushHip. All Rights Reserved."
-			VALUE "OriginalFilename", "FlushHip.exe"
-			VALUE "ProductName", "FlushHip"
+			VALUE "InternalName", "go-calculator"
+			VALUE "LegalCopyright", "Copyright (C) 2020. dcxcn/go-calculator. All Rights Reserved."
+			VALUE "OriginalFilename", "go-calculator.exe"
+			VALUE "ProductName", "go-calculator"
 			VALUE "ProductVersion", TOSTRING(MAKEVER(VER_MAJOR, VER_MINOR, VER_PATCH, VER_REVISION, VER_REVISION_HASH))
         END
     END
@@ -36,5 +36,4 @@ BEGIN
 END
 
 1 ICON "main.ico"
-
-1 RT_MANIFEST "main.manifest"
+//1 RT_MANIFEST "main.manifest"
