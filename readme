@@ -1,0 +1,12 @@
+操作前提：安装 MinGW
+下载地址：点击这里转到下载地址
+
+在 main.go 的同级目录下 新建文件 main.rc ，文件内容如下
+IDI_ICON1 ICON "ICON.ico"
+在 main.rc 的同级目录下 放置一个 ICON.ico 的图标文件
+按住 Shift 右键当前目录，打开命令提示符，输入如下指令回车
+windres -o main.syso main.rc
+命令结束后会生成一个 main.syso 文件
+最后一步，在命令输入如下指令回车，就编译好了有图标的exe可执行程序
+
+go build -ldflags="-H windowsgui -w -s"
