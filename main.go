@@ -24,40 +24,38 @@ import (
 	"sync/atomic"
 )
 
-
-//go:generate goversioninfo -icon=resource/icon.ico -manifest=resource/goversioninfo.exe.manifest
 type window struct {
 	*app.Window
-	calEditor widget.Editor
-	calLogger widget.Editor
-	more  widget.Clickable
-	btn_1 widget.Clickable
-	btn_2 widget.Clickable
-	btn_3 widget.Clickable
-	btn_4 widget.Clickable
-	btn_5 widget.Clickable
-	btn_6 widget.Clickable
-	btn_7 widget.Clickable
-	btn_8 widget.Clickable
-	btn_9 widget.Clickable
-	btn_0 widget.Clickable
-	btn_00 widget.Clickable
-	btn_dot widget.Clickable
-	btn_plus widget.Clickable
-	btn_minus widget.Clickable
-	btn_multiply widget.Clickable
-	btn_divide widget.Clickable
-	btn_xkh_l widget.Clickable
-	btn_xkh_r widget.Clickable
-	btn_mod widget.Clickable
-	btn_sqrt widget.Clickable
+	calEditor     widget.Editor
+	calLogger     widget.Editor
+	more          widget.Clickable
+	btn_1         widget.Clickable
+	btn_2         widget.Clickable
+	btn_3         widget.Clickable
+	btn_4         widget.Clickable
+	btn_5         widget.Clickable
+	btn_6         widget.Clickable
+	btn_7         widget.Clickable
+	btn_8         widget.Clickable
+	btn_9         widget.Clickable
+	btn_0         widget.Clickable
+	btn_00        widget.Clickable
+	btn_dot       widget.Clickable
+	btn_plus      widget.Clickable
+	btn_minus     widget.Clickable
+	btn_multiply  widget.Clickable
+	btn_divide    widget.Clickable
+	btn_xkh_l     widget.Clickable
+	btn_xkh_r     widget.Clickable
+	btn_mod       widget.Clickable
+	btn_sqrt      widget.Clickable
 	btn_backspace widget.Clickable
-	btn_clean widget.Clickable
-	btn_equal widget.Clickable
-	btn_savelog widget.Clickable
-	btn_readlog widget.Clickable
-	btn_about widget.Clickable
-	close widget.Clickable
+	btn_clean     widget.Clickable
+	btn_equal     widget.Clickable
+	btn_savelog   widget.Clickable
+	btn_readlog   widget.Clickable
+	btn_about     widget.Clickable
+	close         widget.Clickable
 }
 type (
 	D = layout.Dimensions
@@ -69,17 +67,15 @@ func main() {
 	app.Main()
 }
 
-
 var (
 	windowCount int32
-	listV = &layout.List{
+	listV       = &layout.List{
 		Axis: layout.Vertical,
 	}
 	listH = &layout.List{
 		Axis: layout.Horizontal,
 	}
 )
-
 
 func newWindow() {
 	atomic.AddInt32(&windowCount, +1)
@@ -90,8 +86,7 @@ func newWindow() {
 			app.MinSize(unit.Dp(400), unit.Dp(500)),
 			app.MaxSize(unit.Dp(400), unit.Dp(500)),
 			app.Title("Go-Calculator"),
-
-			)
+		)
 		if err := w.loop(w.Events()); err != nil {
 			log.Fatal(err)
 		}
@@ -116,100 +111,100 @@ func (w *window) loop(events <-chan event.Event) error {
 			for w.close.Clicked() {
 				w.Close()
 			}
-			for w.btn_readlog.Clicked(){
-				logStr,_:= GetFileContentAsStringLines("./calculator.log")
-				for _,str:= range logStr{
+			for w.btn_readlog.Clicked() {
+				logStr, _ := GetFileContentAsStringLines("./calculator.log")
+				for _, str := range logStr {
 					w.calLogger.Insert(str)
 				}
 			}
-			for w.btn_savelog.Clicked(){
-				out,_:=os.Create("./calculator.log")
+			for w.btn_savelog.Clicked() {
+				out, _ := os.Create("./calculator.log")
 				out.WriteString(w.calLogger.Text())
 				defer out.Close()
 			}
-			for w.btn_about.Clicked(){
+			for w.btn_about.Clicked() {
 
 			}
-			for w.btn_backspace.Clicked(){
-				txt:=w.calEditor.Text()
+			for w.btn_backspace.Clicked() {
+				txt := w.calEditor.Text()
 				w.calEditor.SetText("")
 				w.calEditor.Insert(txt[:len(txt)-1])
 			}
-			for w.btn_clean.Clicked(){
+			for w.btn_clean.Clicked() {
 				w.calEditor.SetText("")
 			}
-			for w.btn_equal.Clicked(){
+			for w.btn_equal.Clicked() {
 				txt := w.calEditor.Text()
-				res,val := doCompute(txt)
+				res, val := doCompute(txt)
 				w.calEditor.SetText("")
 				w.calEditor.Insert(val)
 				w.calLogger.Insert(res)
 			}
-			for w.btn_1.Clicked(){
+			for w.btn_1.Clicked() {
 				w.calEditor.Insert("1")
 			}
-			for w.btn_2.Clicked(){
+			for w.btn_2.Clicked() {
 				w.calEditor.Insert("2")
 			}
-			for w.btn_3.Clicked(){
+			for w.btn_3.Clicked() {
 				w.calEditor.Insert("3")
 			}
-			for w.btn_4.Clicked(){
+			for w.btn_4.Clicked() {
 				w.calEditor.Insert("4")
 			}
-			for w.btn_5.Clicked(){
+			for w.btn_5.Clicked() {
 				w.calEditor.Insert("5")
 			}
-			for w.btn_6.Clicked(){
+			for w.btn_6.Clicked() {
 				w.calEditor.Insert("6")
 			}
-			for w.btn_7.Clicked(){
+			for w.btn_7.Clicked() {
 				w.calEditor.Insert("7")
 			}
-			for w.btn_8.Clicked(){
+			for w.btn_8.Clicked() {
 				w.calEditor.Insert("8")
 			}
-			for w.btn_9.Clicked(){
+			for w.btn_9.Clicked() {
 				w.calEditor.Insert("9")
 			}
-			for w.btn_0.Clicked(){
+			for w.btn_0.Clicked() {
 				w.calEditor.Insert("0")
 			}
-			for w.btn_00.Clicked(){
+			for w.btn_00.Clicked() {
 				w.calEditor.Insert("00")
 			}
-			for w.btn_dot.Clicked(){
+			for w.btn_dot.Clicked() {
 				w.calEditor.Insert(".")
 			}
-			for w.btn_plus.Clicked(){
+			for w.btn_plus.Clicked() {
 				w.calEditor.Insert("+")
 			}
-			for w.btn_minus.Clicked(){
+			for w.btn_minus.Clicked() {
 				w.calEditor.Insert("-")
 			}
-			for w.btn_multiply.Clicked(){
+			for w.btn_multiply.Clicked() {
 				w.calEditor.Insert("*")
 			}
-			for w.btn_divide.Clicked(){
+			for w.btn_divide.Clicked() {
 				w.calEditor.Insert("/")
 			}
-			for w.btn_xkh_l.Clicked(){
+			for w.btn_xkh_l.Clicked() {
 				w.calEditor.Insert("(")
 			}
-			for w.btn_xkh_r.Clicked(){
+			for w.btn_xkh_r.Clicked() {
 				w.calEditor.Insert(")")
 			}
-			for w.btn_mod.Clicked(){
+			for w.btn_mod.Clicked() {
 				w.calEditor.Insert("%")
 			}
-			for w.btn_sqrt.Clicked(){
-				txt:=w.calEditor.Text()
+			for w.btn_sqrt.Clicked() {
+				txt := w.calEditor.Text()
 				w.calEditor.SetText("")
-				w.calEditor.Insert("sqrt("+txt+")")
+				w.calEditor.Insert("sqrt(" + txt + ")")
 			}
 			gtx := layout.NewContext(&ops, e)
 			//搭建界面
-			BuildUI(gtx,th,w)
+			BuildUI(gtx, th, w)
 			e.Frame(gtx.Ops)
 		}
 	}
@@ -233,7 +228,7 @@ func GetFileContentAsStringLines(filePath string) ([]string, error) {
 	fmt.Printf("get file content as lines: %v, size: %v", filePath, len(result))
 	return result, nil
 }
-func doCompute(exp string) (res string,val string) {
+func doCompute(exp string) (res string, val string) {
 	// input text -> []token
 	toks, err := engine.Parse(exp)
 	if err != nil {
@@ -263,15 +258,15 @@ func doCompute(exp string) (res string,val string) {
 	r := engine.ExprASTResult(ar)
 	fmt.Println("progressing ...\t", r)
 	fmt.Printf("%s = %v\n", exp, r)
-	return fmt.Sprintf("%s = %v\n", exp, r),fmt.Sprintf("%v", r)
+	return fmt.Sprintf("%s = %v\n", exp, r), fmt.Sprintf("%v", r)
 }
-func BuildUI(gtx layout.Context, th *material.Theme,w *window) layout.Dimensions{
+func BuildUI(gtx layout.Context, th *material.Theme, w *window) layout.Dimensions {
 
 	widgets := []layout.Widget{
 		func(gtx C) D {
 			gtx.Constraints.Min.Y = gtx.Px(unit.Dp(100))
 			gtx.Constraints.Max.Y = gtx.Px(unit.Dp(100))
-			ce:= material.Editor(th, &w.calEditor, "Hint")
+			ce := material.Editor(th, &w.calEditor, "Hint")
 			border := widget.Border{Color: color.RGBA{A: 0xff}, CornerRadius: unit.Dp(8), Width: unit.Px(2)}
 			return border.Layout(gtx, func(gtx C) D {
 				return layout.UniformInset(unit.Dp(8)).Layout(gtx, ce.Layout)
@@ -281,8 +276,8 @@ func BuildUI(gtx layout.Context, th *material.Theme,w *window) layout.Dimensions
 		func(gtx C) D {
 			gtx.Constraints.Min.Y = gtx.Px(unit.Dp(100))
 			gtx.Constraints.Max.Y = gtx.Px(unit.Dp(100))
-			ce:= material.Editor(th, &w.calLogger, "Hint")
-			border := widget.Border{Color: color.RGBA{R:0xee,G:0xee,B:0xee,A: 0xff}, CornerRadius: unit.Dp(8), Width: unit.Px(2)}
+			ce := material.Editor(th, &w.calLogger, "Hint")
+			border := widget.Border{Color: color.RGBA{R: 0xee, G: 0xee, B: 0xee, A: 0xff}, CornerRadius: unit.Dp(8), Width: unit.Px(2)}
 			return border.Layout(gtx, func(gtx C) D {
 				return layout.UniformInset(unit.Dp(8)).Layout(gtx, ce.Layout)
 			})
@@ -290,14 +285,14 @@ func BuildUI(gtx layout.Context, th *material.Theme,w *window) layout.Dimensions
 		func(gtx C) D {
 			in := layout.UniformInset(unit.Dp(2))
 			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_savelog, "SaveLog").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_readlog, "ReadLog").Layout)
 				}),
 
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_about, "About").Layout)
 				}),
 			)
@@ -305,20 +300,20 @@ func BuildUI(gtx layout.Context, th *material.Theme,w *window) layout.Dimensions
 		func(gtx C) D {
 			in := layout.UniformInset(unit.Dp(2))
 			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_7, "7").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_8, "8").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_9, "9").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_divide, "÷").Layout)
 				}),
 
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_sqrt, "sqrt").Layout)
 				}),
 			)
@@ -326,20 +321,20 @@ func BuildUI(gtx layout.Context, th *material.Theme,w *window) layout.Dimensions
 		func(gtx C) D {
 			in := layout.UniformInset(unit.Dp(2))
 			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_4, "4").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_5, "5").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_6, "6").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_multiply, "×").Layout)
 				}),
 
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_mod, "%").Layout)
 				}),
 			)
@@ -347,19 +342,19 @@ func BuildUI(gtx layout.Context, th *material.Theme,w *window) layout.Dimensions
 		func(gtx C) D {
 			in := layout.UniformInset(unit.Dp(2))
 			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_1, "1").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_2, "2").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_3, "3").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_minus, "-").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_xkh_l, "(").Layout)
 				}),
 			)
@@ -367,19 +362,19 @@ func BuildUI(gtx layout.Context, th *material.Theme,w *window) layout.Dimensions
 		func(gtx C) D {
 			in := layout.UniformInset(unit.Dp(2))
 			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_0, "0").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_00, "00").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_dot, ".").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_plus, "+").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_xkh_r, ")").Layout)
 				}),
 			)
@@ -387,13 +382,13 @@ func BuildUI(gtx layout.Context, th *material.Theme,w *window) layout.Dimensions
 		func(gtx C) D {
 			in := layout.UniformInset(unit.Dp(2))
 			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_backspace, "<-").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_clean, "C").Layout)
 				}),
-				layout.Flexed(1,func(gtx C) D {
+				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_equal, "=").Layout)
 				}),
 			)
