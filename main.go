@@ -405,36 +405,14 @@ func BuildUI(gtx layout.Context, th *material.Theme, w *window) layout.Dimension
 					return in.Layout(gtx, material.Button(th, &w.btn_about, "About").Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_xkh_l, "(").Layout)
+					btn := material.Button(th, &w.btn_xkh_l, "(")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_xkh_r, ")").Layout)
-				}),
-			)
-		},
-		func(gtx C) D {
-			in := layout.UniformInset(unit.Dp(2))
-			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
-				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_7, "7").Layout)
-				}),
-				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_8, "8").Layout)
-				}),
-				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_9, "9").Layout)
-				}),
-				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_divide, "÷").Layout)
-				}),
-				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_sqrt, "sqrt").Layout)
-				}),
-				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_sin, "sin").Layout)
-				}),
-				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_abs, "abs").Layout)
+					btn := material.Button(th, &w.btn_xkh_r, ")")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
 				}),
 			)
 		},
@@ -442,52 +420,81 @@ func BuildUI(gtx layout.Context, th *material.Theme, w *window) layout.Dimension
 			in := layout.UniformInset(unit.Dp(2))
 			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_4, "4").Layout)
+					btn := material.Button(th, &w.btn_7, "7")
+					btn.Background = color.RGBA{A: 0xff, R: 0x00, G: 0x00, B: 0x00}
+					return in.Layout(gtx, btn.Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_5, "5").Layout)
+					btn := material.Button(th, &w.btn_8, "8")
+					btn.Background = color.RGBA{A: 0xff, R: 0x00, G: 0x00, B: 0x00}
+					return in.Layout(gtx, btn.Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_6, "6").Layout)
+					btn := material.Button(th, &w.btn_9, "9")
+					btn.Background = color.RGBA{A: 0xff, R: 0x00, G: 0x00, B: 0x00}
+					return in.Layout(gtx, btn.Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_multiply, "×").Layout)
+					btn := material.Button(th, &w.btn_divide, "÷")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_cbrt, "cbrt").Layout)
+					btn := material.Button(th, &w.btn_sqrt, "sqrt")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					btn := material.Button(th, &w.btn_sin, "sin")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
+
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					btn := material.Button(th, &w.btn_abs, "abs")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
+				}),
+			)
+		},
+		func(gtx C) D {
+			in := layout.UniformInset(unit.Dp(2))
+			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
+				layout.Flexed(1, func(gtx C) D {
+					btn := material.Button(th, &w.btn_4, "4")
+					btn.Background = color.RGBA{A: 0xff, R: 0x00, G: 0x00, B: 0x00}
+					return in.Layout(gtx, btn.Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					btn := material.Button(th, &w.btn_5, "5")
+					btn.Background = color.RGBA{A: 0xff, R: 0x00, G: 0x00, B: 0x00}
+					return in.Layout(gtx, btn.Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					btn := material.Button(th, &w.btn_6, "6")
+					btn.Background = color.RGBA{A: 0xff, R: 0x00, G: 0x00, B: 0x00}
+					return in.Layout(gtx, btn.Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					btn := material.Button(th, &w.btn_multiply, "×")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					btn := material.Button(th, &w.btn_cbrt, "cbrt")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
 				}),
 
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_cos, "cos").Layout)
+					btn := material.Button(th, &w.btn_cos, "cos")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_ceil, "ceil").Layout)
-				}),
-			)
-		},
-		func(gtx C) D {
-			in := layout.UniformInset(unit.Dp(2))
-			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
-				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_1, "1").Layout)
-				}),
-				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_2, "2").Layout)
-				}),
-				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_3, "3").Layout)
-				}),
-				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_minus, "-").Layout)
-				}),
-				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_cfang, "^").Layout)
-				}),
-				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_tan, "tan").Layout)
-				}),
-				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_floor, "floor").Layout)
+					btn := material.Button(th, &w.btn_ceil, "ceil")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
 				}),
 			)
 		},
@@ -495,25 +502,39 @@ func BuildUI(gtx layout.Context, th *material.Theme, w *window) layout.Dimension
 			in := layout.UniformInset(unit.Dp(2))
 			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_0, "0").Layout)
+					btn := material.Button(th, &w.btn_1, "1")
+					btn.Background = color.RGBA{A: 0xff, R: 0x00, G: 0x00, B: 0x00}
+					return in.Layout(gtx, btn.Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_00, "00").Layout)
+					btn := material.Button(th, &w.btn_2, "2")
+					btn.Background = color.RGBA{A: 0xff, R: 0x00, G: 0x00, B: 0x00}
+					return in.Layout(gtx, btn.Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_dot, ".").Layout)
+					btn := material.Button(th, &w.btn_3, "3")
+					btn.Background = color.RGBA{A: 0xff, R: 0x00, G: 0x00, B: 0x00}
+					return in.Layout(gtx, btn.Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_plus, "+").Layout)
+					btn := material.Button(th, &w.btn_minus, "-")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_mod, "%").Layout)
+					btn := material.Button(th, &w.btn_cfang, "^")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_cot, "cot").Layout)
+					btn := material.Button(th, &w.btn_tan, "tan")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_round, "round").Layout)
+					btn := material.Button(th, &w.btn_floor, "floor")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
 				}),
 			)
 		},
@@ -521,13 +542,59 @@ func BuildUI(gtx layout.Context, th *material.Theme, w *window) layout.Dimension
 			in := layout.UniformInset(unit.Dp(2))
 			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_backspace, "<-").Layout)
+					btn := material.Button(th, &w.btn_0, "0")
+					btn.Background = color.RGBA{A: 0xff, R: 0x00, G: 0x00, B: 0x00}
+					return in.Layout(gtx, btn.Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_clean, "C").Layout)
+					btn := material.Button(th, &w.btn_00, "00")
+					btn.Background = color.RGBA{A: 0xff, R: 0x00, G: 0x00, B: 0x00}
+					return in.Layout(gtx, btn.Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_equal, "=").Layout)
+					btn := material.Button(th, &w.btn_dot, ".")
+					btn.Background = color.RGBA{A: 0xff, R: 0x00, G: 0x00, B: 0x00}
+					return in.Layout(gtx, btn.Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					btn := material.Button(th, &w.btn_plus, "+")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					btn := material.Button(th, &w.btn_mod, "%")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					btn := material.Button(th, &w.btn_cot, "cot")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					btn := material.Button(th, &w.btn_round, "round")
+					btn.Background = color.RGBA{A: 0xff, R: 0x6e, G: 0x6e, B: 0x6e}
+					return in.Layout(gtx, btn.Layout)
+				}),
+			)
+		},
+		func(gtx C) D {
+			in := layout.UniformInset(unit.Dp(2))
+			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
+				layout.Flexed(1, func(gtx C) D {
+					btn := material.Button(th, &w.btn_backspace, "<-")
+					btn.Background = color.RGBA{A: 0xff, R: 0xda, G: 0x26, B: 0x26}
+					return in.Layout(gtx, btn.Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					btn := material.Button(th, &w.btn_clean, "clean")
+					btn.Background = color.RGBA{A: 0xff, R: 0xda, G: 0x26, B: 0x26}
+					return in.Layout(gtx, btn.Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					btn := material.Button(th, &w.btn_equal, "=")
+					btn.Background = color.RGBA{A: 0xff, R: 0x07, G: 0x74, B: 0x70}
+					return in.Layout(gtx, btn.Layout)
 				}),
 			)
 		},
