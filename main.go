@@ -20,35 +20,51 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 	"sync/atomic"
 )
 
 type window struct {
 	*app.Window
-	calEditor     widget.Editor
-	calLogger     widget.Editor
-	more          widget.Clickable
-	btn_1         widget.Clickable
-	btn_2         widget.Clickable
-	btn_3         widget.Clickable
-	btn_4         widget.Clickable
-	btn_5         widget.Clickable
-	btn_6         widget.Clickable
-	btn_7         widget.Clickable
-	btn_8         widget.Clickable
-	btn_9         widget.Clickable
-	btn_0         widget.Clickable
-	btn_00        widget.Clickable
-	btn_dot       widget.Clickable
-	btn_plus      widget.Clickable
-	btn_minus     widget.Clickable
-	btn_multiply  widget.Clickable
-	btn_divide    widget.Clickable
-	btn_xkh_l     widget.Clickable
-	btn_xkh_r     widget.Clickable
-	btn_mod       widget.Clickable
-	btn_sqrt      widget.Clickable
+	calEditor widget.Editor
+	calLogger widget.Editor
+	more      widget.Clickable
+	btn_1     widget.Clickable
+	btn_2     widget.Clickable
+	btn_3     widget.Clickable
+	btn_4     widget.Clickable
+	btn_5     widget.Clickable
+	btn_6     widget.Clickable
+	btn_7     widget.Clickable
+	btn_8     widget.Clickable
+	btn_9     widget.Clickable
+	btn_0     widget.Clickable
+
+	btn_00       widget.Clickable
+	btn_dot      widget.Clickable
+	btn_plus     widget.Clickable
+	btn_minus    widget.Clickable
+	btn_multiply widget.Clickable
+	btn_divide   widget.Clickable
+
+	btn_xkh_l widget.Clickable
+	btn_xkh_r widget.Clickable
+	btn_mod   widget.Clickable
+	btn_sqrt  widget.Clickable
+	btn_cbrt  widget.Clickable
+	btn_cfang widget.Clickable
+
+	btn_sin widget.Clickable
+	btn_cos widget.Clickable
+	btn_tan widget.Clickable
+	btn_cot widget.Clickable
+
+	btn_abs   widget.Clickable
+	btn_ceil  widget.Clickable
+	btn_floor widget.Clickable
+	btn_round widget.Clickable
+
 	btn_backspace widget.Clickable
 	btn_clean     widget.Clickable
 	btn_equal     widget.Clickable
@@ -82,9 +98,9 @@ func newWindow() {
 	go func() {
 		w := new(window)
 		w.Window = app.NewWindow(
-			app.Size(unit.Dp(400), unit.Dp(500)),
-			app.MinSize(unit.Dp(400), unit.Dp(500)),
-			app.MaxSize(unit.Dp(400), unit.Dp(500)),
+			app.Size(unit.Dp(500), unit.Dp(500)),
+			app.MinSize(unit.Dp(500), unit.Dp(500)),
+			app.MaxSize(unit.Dp(500), unit.Dp(500)),
 			app.Title("Go-Calculator"),
 		)
 		if err := w.loop(w.Events()); err != nil {
@@ -199,8 +215,96 @@ func (w *window) loop(events <-chan event.Event) error {
 			}
 			for w.btn_sqrt.Clicked() {
 				txt := w.calEditor.Text()
-				w.calEditor.SetText("")
-				w.calEditor.Insert("sqrt(" + txt + ")")
+				if IsNum(txt) {
+					w.calEditor.SetText("")
+					w.calEditor.Insert("sqrt(" + txt + ")")
+				} else {
+					w.calEditor.Insert("sqrt()")
+				}
+			}
+			for w.btn_cbrt.Clicked() {
+				txt := w.calEditor.Text()
+				if IsNum(txt) {
+					w.calEditor.SetText("")
+					w.calEditor.Insert("cbrt(" + txt + ")")
+				} else {
+					w.calEditor.Insert("cbrt()")
+				}
+			}
+			for w.btn_cfang.Clicked() {
+				w.calEditor.Insert("^")
+			}
+			for w.btn_sin.Clicked() {
+				txt := w.calEditor.Text()
+				if IsNum(txt) {
+					w.calEditor.SetText("")
+					w.calEditor.Insert("sin(" + txt + ")")
+				} else {
+					w.calEditor.Insert("sin()")
+				}
+			}
+			for w.btn_cos.Clicked() {
+				txt := w.calEditor.Text()
+				if IsNum(txt) {
+					w.calEditor.SetText("")
+					w.calEditor.Insert("cos(" + txt + ")")
+				} else {
+					w.calEditor.Insert("cos()")
+				}
+			}
+			for w.btn_tan.Clicked() {
+				txt := w.calEditor.Text()
+				if IsNum(txt) {
+					w.calEditor.SetText("")
+					w.calEditor.Insert("tan(" + txt + ")")
+				} else {
+					w.calEditor.Insert("tan()")
+				}
+			}
+			for w.btn_cot.Clicked() {
+				txt := w.calEditor.Text()
+				if IsNum(txt) {
+					w.calEditor.SetText("")
+					w.calEditor.Insert("cot(" + txt + ")")
+				} else {
+					w.calEditor.Insert("cot()")
+				}
+			}
+			for w.btn_abs.Clicked() {
+				txt := w.calEditor.Text()
+				if IsNum(txt) {
+					w.calEditor.SetText("")
+					w.calEditor.Insert("abs(" + txt + ")")
+				} else {
+					w.calEditor.Insert("abs()")
+				}
+			}
+			for w.btn_ceil.Clicked() {
+				txt := w.calEditor.Text()
+				if IsNum(txt) {
+					w.calEditor.SetText("")
+					w.calEditor.Insert("ceil(" + txt + ")")
+				} else {
+					w.calEditor.Insert("ceil()")
+				}
+			}
+			for w.btn_floor.Clicked() {
+				txt := w.calEditor.Text()
+				if IsNum(txt) {
+					w.calEditor.SetText("")
+					w.calEditor.Insert("floor(" + txt + ")")
+				} else {
+					w.calEditor.Insert("floor()")
+				}
+			}
+			for w.btn_round.Clicked() {
+				txt := w.calEditor.Text()
+				if IsNum(txt) {
+					w.calEditor.SetText("")
+					w.calEditor.Insert("round(" + txt + ")")
+				} else {
+					w.calEditor.Insert("round()")
+				}
 			}
 			gtx := layout.NewContext(&ops, e)
 			//搭建界面
@@ -209,6 +313,11 @@ func (w *window) loop(events <-chan event.Event) error {
 		}
 	}
 }
+func IsNum(s string) bool {
+	_, err := strconv.ParseFloat(s, 64)
+	return err == nil
+}
+
 func GetFileContentAsStringLines(filePath string) ([]string, error) {
 	fmt.Printf("get file content as lines: %v", filePath)
 	result := []string{}
@@ -266,7 +375,7 @@ func BuildUI(gtx layout.Context, th *material.Theme, w *window) layout.Dimension
 		func(gtx C) D {
 			gtx.Constraints.Min.Y = gtx.Px(unit.Dp(100))
 			gtx.Constraints.Max.Y = gtx.Px(unit.Dp(100))
-			ce := material.Editor(th, &w.calEditor, "Hint")
+			ce := material.Editor(th, &w.calEditor, "mathematical expression")
 			border := widget.Border{Color: color.RGBA{A: 0xff}, CornerRadius: unit.Dp(8), Width: unit.Px(2)}
 			return border.Layout(gtx, func(gtx C) D {
 				return layout.UniformInset(unit.Dp(8)).Layout(gtx, ce.Layout)
@@ -276,7 +385,7 @@ func BuildUI(gtx layout.Context, th *material.Theme, w *window) layout.Dimension
 		func(gtx C) D {
 			gtx.Constraints.Min.Y = gtx.Px(unit.Dp(100))
 			gtx.Constraints.Max.Y = gtx.Px(unit.Dp(100))
-			ce := material.Editor(th, &w.calLogger, "Hint")
+			ce := material.Editor(th, &w.calLogger, "log")
 			border := widget.Border{Color: color.RGBA{R: 0xee, G: 0xee, B: 0xee, A: 0xff}, CornerRadius: unit.Dp(8), Width: unit.Px(2)}
 			return border.Layout(gtx, func(gtx C) D {
 				return layout.UniformInset(unit.Dp(8)).Layout(gtx, ce.Layout)
@@ -295,6 +404,12 @@ func BuildUI(gtx layout.Context, th *material.Theme, w *window) layout.Dimension
 				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_about, "About").Layout)
 				}),
+				layout.Flexed(1, func(gtx C) D {
+					return in.Layout(gtx, material.Button(th, &w.btn_xkh_l, "(").Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					return in.Layout(gtx, material.Button(th, &w.btn_xkh_r, ")").Layout)
+				}),
 			)
 		},
 		func(gtx C) D {
@@ -312,9 +427,14 @@ func BuildUI(gtx layout.Context, th *material.Theme, w *window) layout.Dimension
 				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_divide, "÷").Layout)
 				}),
-
 				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_sqrt, "sqrt").Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					return in.Layout(gtx, material.Button(th, &w.btn_sin, "sin").Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					return in.Layout(gtx, material.Button(th, &w.btn_abs, "abs").Layout)
 				}),
 			)
 		},
@@ -333,9 +453,15 @@ func BuildUI(gtx layout.Context, th *material.Theme, w *window) layout.Dimension
 				layout.Flexed(1, func(gtx C) D {
 					return in.Layout(gtx, material.Button(th, &w.btn_multiply, "×").Layout)
 				}),
+				layout.Flexed(1, func(gtx C) D {
+					return in.Layout(gtx, material.Button(th, &w.btn_cbrt, "cbrt").Layout)
+				}),
 
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_mod, "%").Layout)
+					return in.Layout(gtx, material.Button(th, &w.btn_cos, "cos").Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					return in.Layout(gtx, material.Button(th, &w.btn_ceil, "ceil").Layout)
 				}),
 			)
 		},
@@ -355,7 +481,13 @@ func BuildUI(gtx layout.Context, th *material.Theme, w *window) layout.Dimension
 					return in.Layout(gtx, material.Button(th, &w.btn_minus, "-").Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_xkh_l, "(").Layout)
+					return in.Layout(gtx, material.Button(th, &w.btn_cfang, "^").Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					return in.Layout(gtx, material.Button(th, &w.btn_tan, "tan").Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					return in.Layout(gtx, material.Button(th, &w.btn_floor, "floor").Layout)
 				}),
 			)
 		},
@@ -375,7 +507,13 @@ func BuildUI(gtx layout.Context, th *material.Theme, w *window) layout.Dimension
 					return in.Layout(gtx, material.Button(th, &w.btn_plus, "+").Layout)
 				}),
 				layout.Flexed(1, func(gtx C) D {
-					return in.Layout(gtx, material.Button(th, &w.btn_xkh_r, ")").Layout)
+					return in.Layout(gtx, material.Button(th, &w.btn_mod, "%").Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					return in.Layout(gtx, material.Button(th, &w.btn_cot, "cot").Layout)
+				}),
+				layout.Flexed(1, func(gtx C) D {
+					return in.Layout(gtx, material.Button(th, &w.btn_round, "round").Layout)
 				}),
 			)
 		},
