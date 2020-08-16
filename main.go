@@ -15,6 +15,7 @@ import (
 	"gioui.org/unit"
 	"gioui.org/widget"
 	"gioui.org/widget/material"
+	"go-calculator/controls"
 	"go-calculator/engine"
 	"image/color"
 	"io/ioutil"
@@ -129,6 +130,7 @@ func (w *window) loop(events <-chan event.Event) error {
 			}
 			for w.btn_readlog.Clicked() {
 				logStr, _ := GetFileContentAsStringLines("./calculator.log")
+				w.calLogger.SetText("")
 				for _, str := range logStr {
 					w.calLogger.Insert(str)
 				}
@@ -139,7 +141,7 @@ func (w *window) loop(events <-chan event.Event) error {
 				defer out.Close()
 			}
 			for w.btn_about.Clicked() {
-
+				controls.ShowMessageBox("About", "developer:dcx in china\n beijing changping")
 			}
 			for w.btn_backspace.Clicked() {
 				txt := w.calEditor.Text()
