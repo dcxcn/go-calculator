@@ -47,9 +47,9 @@ func newWindow(title string, msg string) {
 		w := new(MessageBox)
 		w.msgText = msg
 		w.Window = app.NewWindow(
-			app.Size(unit.Dp(300), unit.Dp(200)),
-			app.MinSize(unit.Dp(300), unit.Dp(200)),
-			app.MaxSize(unit.Dp(300), unit.Dp(200)),
+			app.Size(unit.Dp(400), unit.Dp(200)),
+			app.MinSize(unit.Dp(400), unit.Dp(200)),
+			app.MaxSize(unit.Dp(400), unit.Dp(200)),
 			app.Title(title),
 		)
 		if err := w.loop(w.Events()); err != nil {

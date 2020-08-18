@@ -141,7 +141,7 @@ func (w *window) loop(events <-chan event.Event) error {
 				defer out.Close()
 			}
 			for w.btn_about.Clicked() {
-				controls.ShowMessageBox("About", "developer:dcx in china\n beijing changping")
+				controls.ShowMessageBox("About", "|developer: duanchunxiao\n|__country: china\n|_____city: beijing changping\n|____email: 837578856@qq.com")
 			}
 			for w.btn_backspace.Clicked() {
 				txt := w.calEditor.Text()
